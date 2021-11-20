@@ -16,7 +16,7 @@ const getAllUsers = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(404).json({
-      payload: error,
+      payload: error.message,
       status: "error",
     });
   }
@@ -53,7 +53,7 @@ const createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(400).json({
-      payload: error,
+      payload: error.message,
       status: "error",
     });
   }
