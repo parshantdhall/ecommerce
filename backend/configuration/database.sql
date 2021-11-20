@@ -25,3 +25,6 @@ CREATE TABLE Users(
     is_admin BOOL NOT NULL DEFAULT false,
     is_active BOOL NOT NULL DEFAULT false
 );
+
+-- INSERTYNG THE USER
+INSERT INTO users (user_id, first_name, last_name, email, password, is_admin, is_active) VALUES (uuid_generate_v4(), 'Parshant', 'Dhall', 'hello@abc.com', 'paswwwww', true, true);
