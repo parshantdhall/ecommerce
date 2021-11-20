@@ -1,10 +1,10 @@
-const { Client } = require("pg");
+const { Pool } = require("pg");
 
 const user = process.env.DBUSER;
 const password = process.env.DBPASSWORD;
 const host = process.env.DBHOST;
 
-const client = new Client({
+const pool = new Pool({
   host,
   user,
   password,
@@ -13,6 +13,6 @@ const client = new Client({
 });
 
 module.exports = {
-  client,
-  query: (queryText, params) => client.query(queryText, params),
+  pool,
+  query: (queryText, params) => pool.query(queryText, params),
 };

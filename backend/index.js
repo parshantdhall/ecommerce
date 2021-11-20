@@ -7,11 +7,12 @@ const db = require("./configuration/database");
 
 // body parser
 app.use(express.json());
-
 // connecting to databse
-db.client.connect((err) => {
+db.pool.connect((err, client) => {
   if (err) console.log(err);
-  else console.log("Database connected");
+  else {
+    console.log("Database connected");
+  }
 });
 
 // --------Routes confuiguration-------------
