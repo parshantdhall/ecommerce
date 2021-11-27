@@ -62,6 +62,10 @@ const createUser = async (req, res) => {
 const getSingleUser = async (req, res) => {
   try {
     const user_id = req.params.uid;
+    // if requested user id is not equal to the one in jwt
+    if (res.logged_user !== user_id) throw new Error("You are not Authorized");
+
+    // if everything went fine send the user
     const user = await query(
       "SELECT user_id, created_at, first_name, last_name, email, is_admin, is_active FROM users WHERE user_id=$1",
       [user_id]
