@@ -26,7 +26,7 @@ const providers = [
             "Content-Type": "application/json",
           },
         });
-
+        console.log(data);
         // IF password is right fetch the user info
         if (data.status === "ok" && status === 200) {
           const userId = data.payload.uid;
@@ -43,6 +43,7 @@ const providers = [
         }
       } catch (e) {
         const errorMessage = e.data.payload;
+        console.log(errorMessage);
         throw new Error(errorMessage);
       }
     },

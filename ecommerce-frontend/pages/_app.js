@@ -1,13 +1,13 @@
-import axios from "axios";
 import { Provider } from "next-auth/client";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function MyApp({ Component, pageProps }) {
-  // setting base url for axios
-  axios.defaults.baseURL = process.env.BACKEND_BASE_URL;
   return (
-    <Provider session={pageProps.session}>
-      <Component {...pageProps} />
-    </Provider>
+    <ChakraProvider>
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
+    </ChakraProvider>
   );
 }
 export default MyApp;
