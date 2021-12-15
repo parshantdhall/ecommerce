@@ -1,5 +1,14 @@
-import { Heading } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
+import Header from "../components/layout/Header";
+import MainBody from "../components/layout/MainBody";
+import "swiper/css";
+import "swiper/css/bundle";
 
 export default function Home() {
-  return <Heading>Hello World!</Heading>;
+  return (
+    <Box>
+      <Header />
+      <MainBody />
+    </Box>
+  );
 }
