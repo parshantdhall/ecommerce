@@ -8,30 +8,30 @@ const CategorySlider = () => {
     <Box aria-label="select category" width="full" cursor="grab">
       <Swiper spaceBetween={100} slidesPerView={"auto"}>
         <SwiperSlide>
-          <SliderComponent isActive={true} />
+          <SliderComponent isActive={true} imgSrc="/shoe.svg" catText="Shoes" />
         </SwiperSlide>
         <SwiperSlide>
-          <SliderComponent />
+          <SliderComponent imgSrc="/jewel2.svg" catText="Jewelery" />
         </SwiperSlide>
         <SwiperSlide>
-          <SliderComponent />
+          <SliderComponent imgSrc="/jewel.svg" catText="Hello" />
         </SwiperSlide>
       </Swiper>
     </Box>
   );
 };
-const SliderComponent = ({ isActive }) => {
+const SliderComponent = ({ isActive, imgSrc, catText }) => {
   return (
     <Link href="#" passHref title="category link">
-      <VStack cursor="pointer">
-        <Image alt="shirt" src="/shoe.svg" />
+      <VStack cursor="pointer" width="45px">
+        <Image alt="shirt" src={imgSrc} />
         <Text
           as="p"
           className="text"
-          color={isActive ? "orange.400" : "gray.800"}
+          color={isActive ? "orange.400" : "gray.600"}
           fontWeight="bold"
         >
-          Shoes
+          {catText}
         </Text>
       </VStack>
     </Link>

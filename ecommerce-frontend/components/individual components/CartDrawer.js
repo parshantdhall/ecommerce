@@ -11,8 +11,13 @@ import {
   Input,
   Button,
   useDisclosure,
+  Divider,
+  VStack,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import { BiShoppingBag } from "react-icons/bi";
+import CartProduct from "./CartProduct";
 
 const CartDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,17 +46,49 @@ const CartDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>My Cart</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            {/* * TODO: Add Cart product Here!!! */}
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
+            <CartProduct />
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
+            <VStack>
+              <HStack justifyContent="space-between" width="full">
+                <Text fontSize="sm">Subtotal</Text>
+                <Text fontSize="sm">$1000.11</Text>
+              </HStack>
+              <HStack justifyContent="space-between" width="full">
+                <Text fontSize="sm">Taxes</Text>
+                <Text fontSize="sm">$11</Text>
+              </HStack>
+              <HStack justifyContent="space-between" width="full">
+                <Text fontSize="sm">Shipping</Text>
+                <Text fontSize="sm">$12</Text>
+              </HStack>
+              <Divider />
+              <HStack justifyContent="space-between" width="full">
+                <Text fontWeight="bold" fontSize="sm">
+                  Total
+                </Text>
+                <Text fontWeight="bold" fontSize="sm">
+                  $1002.11
+                </Text>
+              </HStack>
+              <Button size="lg" backgroundColor="black" color="white">
+                PROCEED TO CHECKOUT
+              </Button>
+            </VStack>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
