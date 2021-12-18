@@ -1,5 +1,6 @@
 import { useState, memo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Box,
   InputGroup,
@@ -7,17 +8,33 @@ import {
   Image,
   InputRightElement,
   HStack,
+  IconButton,
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import CartDrawer from "../individual components/CartDrawer";
 
 const Header = () => {
-  const [searchKeyword, setSearchKeyword] = useState();
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const router = useRouter();
 
+  // -Functions----
   const handleChange = (e) => {
     setSearchKeyword(e.target.value);
-    console.log(e.target.value);
   };
+
+  const handleSearchFormSubmission = (e) => {
+    e.preventDefault();
+    // if there is no search keyword
+    if (!searchKeyword || searchKeyword === "" || searchKeyword === " ") return;
+
+    // if there is search keyword then push to search page with the query parameter
+    router.push({
+      pathname: "/search",
+      query: { q: searchKeyword },
+    });
+  };
+
+  // -----Returning the component------
   return (
     <Box
       as="header"
@@ -50,7 +67,7 @@ const Header = () => {
 
         {/* --------Search Bar---- */}
         <Box maxWidth="60em" margin="auto" flex="1">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => handleSearchFormSubmission(e)}>
             <InputGroup>
               <Input
                 type="text"
@@ -65,8 +82,13 @@ const Header = () => {
                   color: "gray.300",
                 }}
               />
-              <InputRightElement pointerEvents="none">
-                <FaSearch />
+              <InputRightElement pointerEvents="auto">
+                <IconButton
+                  aria-label="search button"
+                  icon={<FaSearch />}
+                  variant="ghost"
+                  onClick={handleSearchFormSubmission}
+                />
               </InputRightElement>
             </InputGroup>
           </form>

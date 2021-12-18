@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  VStack,
-  useMediaQuery,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Heading, VStack, useMediaQuery } from "@chakra-ui/react";
 import CategorySlider from "../individual components/CategorySlider";
-import Product from "../individual components/Product";
+import ProductGrid from "../individual components/ProductGrid";
 
 const Category = () => {
   const [isSmallerThanIp6] = useMediaQuery("(max-width: 350px)");
@@ -34,27 +27,7 @@ const Category = () => {
         </Box>
       </VStack>
       {/* ------Products area------- */}
-      <Box my={10}>
-        <SimpleGrid
-          minChildWidth={isSmallerThanIp6 ? "200px" : "310px"}
-          spacing={10}
-        >
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-        </SimpleGrid>
-        <Box
-          w="full"
-          display="flex"
-          justifyContent="center"
-          mt={{ base: 10, md: 7 }}
-        >
-          <Button variant="solid" colorScheme="yellow" size="lg">
-            All Products
-          </Button>
-        </Box>
-      </Box>
+      <ProductGrid />
     </Box>
   );
 };

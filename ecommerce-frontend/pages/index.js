@@ -1,14 +1,12 @@
-import { Box } from "@chakra-ui/react";
-import Header from "../components/layout/Header";
-import MainBody from "../components/layout/MainBody";
 import "swiper/css";
 import "swiper/css/bundle";
+import MainBody from "../components/layout/MainBody";
+import PageLayout from "../components/layout/PageLayout";
 
 export default function Home() {
   return (
-    <Box>
-      <Header />
+    <PageLayout>
       <MainBody />
-    </Box>
+    </PageLayout>
   );
 }

@@ -41,7 +41,7 @@ const CartProduct = () => {
             />
           </Box>
           {/* Product Desc */}
-          <VStack spacing={2} alignItems="flex-start">
+          <VStack spacing={2} alignItems="flex-start" w="full">
             {/* Product Name and Price */}
             <HStack w="full" justifyContent="space-between">
               <Text as="p" fontWeight="bold">
@@ -73,7 +73,7 @@ const CartProduct = () => {
           </VStack>
         </HStack>
         {/* number of product area */}
-        <HStack spacing={2} w="full">
+        <HStack spacing={4} w="full">
           <IconButton aria-label="remove product" icon={<FaTimes />} />
           {/* Note default value will be 1 or number of times user add
             Max will be how much item is remaining in the inventory

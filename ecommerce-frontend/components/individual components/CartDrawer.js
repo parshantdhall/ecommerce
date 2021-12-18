@@ -42,6 +42,7 @@ const CartDrawer = () => {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
+        size="sm"
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -63,7 +64,7 @@ const CartDrawer = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <VStack>
+            <VStack w="full">
               <HStack justifyContent="space-between" width="full">
                 <Text fontSize="sm">Subtotal</Text>
                 <Text fontSize="sm">$1000.11</Text>
@@ -96,4 +97,4 @@ const CartDrawer = () => {
   );
 };
 
-export default React.memo(CartDrawer);
+export default CartDrawer;
