@@ -26,7 +26,7 @@ const CartProduct = () => {
           <Box
             role="image container"
             height="80px"
-            width="80px"
+            width="100px"
             pos="relative"
             overflow="hidden"
             borderRadius="lg"

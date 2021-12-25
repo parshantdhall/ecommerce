@@ -7,7 +7,7 @@ const getAllProducts = async (req, res) => {
   	products{
       id,
       name,
-      blah
+      
     }
 }`;
     const data = await gFetch(query);

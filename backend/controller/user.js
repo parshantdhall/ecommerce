@@ -1,5 +1,6 @@
 const { query } = require("../configuration/database");
 const bcrypt = require("bcryptjs");
+const errorFunc = require("../configuration/errorFunc");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -61,6 +62,7 @@ const createUser = async (req, res) => {
 
 const getSingleUser = async (req, res) => {
   try {
+    // User id coming from jwt
     const user_id = req.params.uid;
     // if requested user id is not equal to the one in jwt
     if (res.logged_user !== user_id) throw new Error("You are not Authorized");
@@ -80,10 +82,7 @@ const getSingleUser = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(404).json({
-      payload: error.message,
-      status: "error",
-    });
+    return errorFunc(404, error.message, res);
   }
 };
 

@@ -8,7 +8,7 @@ const pool = new Pool({
   host,
   user,
   password,
-  port: 5432,
+  // port: 5432,
   database: "ecommerce",
 });
 

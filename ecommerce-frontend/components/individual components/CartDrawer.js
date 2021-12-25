@@ -86,7 +86,7 @@ const CartDrawer = () => {
                   $1002.11
                 </Text>
               </HStack>
-              <Button size="lg" backgroundColor="black" color="white">
+              <Button size="lg" width="80%" colorScheme="yellow">
                 PROCEED TO CHECKOUT
               </Button>
             </VStack>
