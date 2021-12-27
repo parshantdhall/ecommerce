@@ -8,8 +8,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - db
-    environment:
-      NODE_ENV: development
     ports:
       - '3001:3001'
     restart: always

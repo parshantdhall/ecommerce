@@ -15,11 +15,7 @@ const getAllUsers = async (req, res) => {
       status: "ok",
     });
   } catch (error) {
-    console.log(error);
-    return res.status(404).json({
-      payload: error.message,
-      status: "error",
-    });
+    errorFunc(404, error.message, res);
   }
 };
 
@@ -52,11 +48,7 @@ const createUser = async (req, res) => {
       status: "ok",
     });
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({
-      payload: error.message,
-      status: "error",
-    });
+    errorFunc(400, error.message, res);
   }
 };
 

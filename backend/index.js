@@ -27,6 +27,13 @@ db.pool.connect((err, client) => {
 const addRoutes = require("./routes");
 addRoutes(app);
 
+// 404 route
+app.get("*", (req, res) => {
+  res.status(400).send({
+    message: "Cannot get the requested route",
+  });
+});
+
 // Starting the server
 server.listen(port, () => {
   console.log("--------------------------");
