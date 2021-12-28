@@ -10,7 +10,17 @@ services:
       - db
     ports:
       - '3001:3001'
+      - '9229:9229'
     restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command:
+      - nodemon
+      - --inspect=0.0.0.0:9229
+      - index.js
+    environment:
+      - PORT=3001
 
   db:
     container_name: db
@@ -24,7 +34,6 @@ services:
     restart: always
     ports:
       - '5432-5432'
-
 
   pgadmin:
     container_name: pgadmin4_container
