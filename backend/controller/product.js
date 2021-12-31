@@ -1,18 +1,25 @@
 const gFetch = require("../configuration/gfetch");
 const errorFunc = require("../configuration/errorFunc");
+const resFunc = require("../configuration/resFunc");
 
 const getAllProducts = async (req, res) => {
   try {
     const query = `{
   	products{
       id,
-      name,
+      productTitle,
+      productPrice
     }
 }`;
     const data = await gFetch(query);
-    res.status(200).json(data);
+
+    resFunc(200, data, data.products.length, res);
   } catch (error) {
-    errorFunc(404, error.response.errors[0].message, res);
+    errorFunc(
+      error.response.errors[0].extensions.code,
+      error.response.errors[0].message,
+      res
+    );
   }
 };
 
@@ -23,11 +30,11 @@ const getSingleProduct = async (req, res) => {
     const query = `{
   	product(where: {id: "${pId}"}) {
       id
-      name
+      productTitle
     }
   }`;
     const data = await gFetch(query);
-    res.status(200).json(data);
+    resFunc(200, data, 1, res);
   } catch (error) {
     errorFunc(404, error.response.errors[0].message, res);
   }

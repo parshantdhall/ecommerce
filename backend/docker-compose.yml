@@ -19,8 +19,8 @@ services:
       - nodemon
       - --inspect=0.0.0.0:9229
       - index.js
-    environment:
-      - PORT=3001
+    env_file:
+      - ./configuration/.env
 
   db:
     container_name: db
@@ -48,9 +48,21 @@ services:
       - "5050:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
+  yacht:
+    container_name: yacht
+    image: selfhostedpro/yacht
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    volumes:
+      - yacht:/config
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   pgdata:
   pgadmin-data:
+  yacht:
+
 
 
 
