@@ -38,11 +38,11 @@ const getAllProducts = async (req, res) => {
 };
 
 const getSingleProduct = async (req, res) => {
-  const pId = req.params.pid;
+  const pSlug = req.params.pslug;
 
   try {
     const query = `{
-  	product(where: {id: "${pId}"}) {
+  	product(where: {productSlug: "${pSlug}"}) {
        id,
 		  productTitle
 		  productSlug

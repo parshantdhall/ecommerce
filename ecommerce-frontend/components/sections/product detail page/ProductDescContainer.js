@@ -8,7 +8,16 @@ import {
 } from "@chakra-ui/react";
 import CustomRadioBtns from "../../individual components/CustomRadioBtns";
 
-const ProductDescContainer = () => {
+const ProductDescContainer = ({
+  productTitle,
+  productPrice,
+  isProductOnSale,
+  productSalePrice,
+  category,
+  colorsAvailable,
+  numberOfItemsLeft,
+  productDescription,
+}) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "framework",
     defaultValue: "react",
@@ -20,8 +29,13 @@ const ProductDescContainer = () => {
 
   return (
     <Container py={4} maxW="container.xl" fontFamily="Montserrat">
-      <Heading as="h1" fontFamily="Merriweather" textAlign="center">
-        This is shoe
+      <Heading
+        as="h1"
+        textTransform="capitalize"
+        fontFamily="Merriweather"
+        textAlign="center"
+      >
+        {productTitle}
       </Heading>
 
       {/* ----SIze----- */}

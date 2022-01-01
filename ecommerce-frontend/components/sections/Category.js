@@ -3,7 +3,7 @@ import { Box, Heading, VStack, useMediaQuery } from "@chakra-ui/react";
 import CategorySlider from "../individual components/CategorySlider";
 import ProductGrid from "../individual components/ProductGrid";
 
-const Category = () => {
+const Category = ({ productsData, categoriesData }) => {
   const [isSmallerThanIp6] = useMediaQuery("(max-width: 350px)");
   return (
     <Box
@@ -27,7 +27,7 @@ const Category = () => {
         </Box>
       </VStack>
       {/* ------Products area------- */}
-      <ProductGrid />
+      <ProductGrid productsData={productsData}  />
     </Box>
   );
 };

@@ -2,11 +2,11 @@ import { Box } from "@chakra-ui/react";
 import Category from "../sections/Category";
 import HeroSlider from "../sections/HeroSlider";
 
-const MainBody = () => {
+const MainBody = ({ productsData, categoriesData }) => {
   return (
     <Box as="main">
       <HeroSlider />
-      <Category />
+      <Category productsData={productsData} categoriesData={categoriesData} />
     </Box>
   );
 };

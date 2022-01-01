@@ -5,4 +5,7 @@ module.exports = {
   env: {
     BACKEND_BASE_URL: process.env.BACKEND_BASE_URL,
   },
+  images: {
+    domains: ["media.graphcms.com"],
+  },
 };

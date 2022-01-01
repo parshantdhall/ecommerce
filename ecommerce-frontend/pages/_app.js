@@ -2,6 +2,8 @@ import { Provider } from "next-auth/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import "../styles/globals.css";
 import { CustomTheme } from "../lib/ThemeConfig";
+import "swiper/css";
+import "swiper/css/bundle";
 
 function MyApp({ Component, pageProps }) {
   return (

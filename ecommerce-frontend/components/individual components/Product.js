@@ -5,9 +5,24 @@ import { Box, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { shimmer, toBase64 } from "../../lib/imageLoading";
 
-const Product = () => {
+const Product = ({ productData }) => {
+  const {
+    productTitle,
+    productSlug,
+    productPrice,
+    productSalePrice,
+    isProductOnSale,
+    productFeaturedImage,
+  } = productData;
+
+  const handleAddToCartBtnClick = (e) => {
+    // This is to stop event bubbling
+    e.stopPropagation();
+    console.log("added to cart");
+  };
+
   return (
-    <Link href="#" passHref title="link to product details">
+    <Link href={`/${productSlug}`} passHref title="link to product details">
       <Box
         _hover={{
           boxShadow: "1px 2px 4px rgba(0,0,0,.1),-1px 2px 4px rgba(0,0,0,.1)",
@@ -24,7 +39,7 @@ const Product = () => {
           borderBottomRadius="0px"
         >
           <Image
-            src="/footwear.jpg"
+            src={productFeaturedImage?.url || "/default-product-image.png"}
             layout="fill"
             objectFit="cover"
             aria-label="Featured post image."
@@ -35,15 +50,28 @@ const Product = () => {
               shimmer(700, 475)
             )}`}
           />
-          <Box w="50px" h="50px" position="absolute" top="20px" right="20px">
-            <Image
-              src="/sale.svg"
-              layout="fill"
-              objectFit="cover"
-              quality={100}
-              alt="Sale Tag"
-            />
-          </Box>
+          {
+            // if product on sale show sale tag
+            isProductOnSale ? (
+              <Box
+                w="50px"
+                h="50px"
+                position="absolute"
+                top="20px"
+                right="20px"
+              >
+                <Image
+                  src="/sale.svg"
+                  layout="fill"
+                  objectFit="cover"
+                  quality={100}
+                  alt="Sale Tag"
+                />
+              </Box>
+            ) : (
+              ""
+            )
+          }
         </Box>
         <Box
           backgroundColor="white"
@@ -55,22 +83,26 @@ const Product = () => {
           <HStack justifyContent="space-between" textAlign="center">
             <VStack spacing={2} alignItems="flex-start">
               <Text as="p" fontWeight="bold" fontFamily="Montserrat">
-                Product Name
+                {productTitle || "No Product Title "}
               </Text>
               {/* ---Price-- */}
               <HStack>
-                <Text
-                  as="p"
-                  fontFamily="Merriweather"
-                  textDecoration="line-through"
-                  color="gray.400"
-                >
-                  $200
-                </Text>
-
-                <Text as="p" fontFamily="Merriweather">
-                  $200
-                </Text>
+                {/* sale price */}
+                {isProductOnSale ? (
+                  <Text
+                    as="p"
+                    fontFamily="Merriweather"
+                    textDecoration="line-through"
+                    color="gray.400"
+                  >
+                    ${productSalePrice || 0.0}
+                  </Text>
+                ) : (
+                  //  {/* Original Product Price */}
+                  <Text as="p" fontFamily="Merriweather">
+                    ${productPrice || 0.0}
+                  </Text>
+                )}
               </HStack>
             </VStack>
             <Box>
@@ -78,6 +110,7 @@ const Product = () => {
                 aria-label="Add to cart Button"
                 icon={<FaCartPlus />}
                 colorScheme="red"
+                onClick={handleAddToCartBtnClick}
               />
             </Box>
           </HStack>

@@ -33,3 +33,7 @@ body::-webkit-scrollbar-thumb {
 .swiper-slide {
   width: fit-content !important;
 }
+
+.customSlider {
+  width: 100% !important;
+}
