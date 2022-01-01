@@ -1,19 +1,15 @@
 const { query } = require("../configuration/database");
 const bcrypt = require("bcryptjs");
 const errorFunc = require("../configuration/errorFunc");
+const resFunc = require("../configuration/resFunc");
 
 const getAllUsers = async (req, res) => {
   try {
     const allUsers = await query(
       "SELECT user_id, created_at, first_name, last_name, email, is_admin, is_active FROM users"
     );
-    return res.status(200).json({
-      payload: {
-        count: allUsers.rowCount,
-        data: allUsers.rows,
-      },
-      status: "ok",
-    });
+
+    return resFunc(200, allUsers.rows, allUsers.rowCount, res);
   } catch (error) {
     errorFunc(404, error.message, res);
   }
@@ -38,15 +34,9 @@ const createUser = async (req, res) => {
       [firstName, lastName, email, hash]
     );
 
-    // **NOTE**: Create and send JWT with this response and with the login system
+    // **NOTE**: Create and send JWT with this response and with the login system for customer login system
 
-    return res.status(201).json({
-      payload: {
-        count: newUser.rowCount,
-        data: newUser.rows,
-      },
-      status: "ok",
-    });
+    return resFunc(201, newUser.rows, newUser.rowCount, res);
   } catch (error) {
     errorFunc(400, error.message, res);
   }
@@ -65,13 +55,8 @@ const getSingleUser = async (req, res) => {
       [user_id]
     );
     if (user.rowCount <= 0) throw new Error("No User Found!");
-    return res.status(200).json({
-      payload: {
-        count: user.rowCount,
-        data: user.rows,
-      },
-      status: "ok",
-    });
+
+    return resFunc(200, user.rows, user.rowCount, res);
   } catch (error) {
     console.log(error);
     return errorFunc(404, error.message, res);

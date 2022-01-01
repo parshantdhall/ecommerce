@@ -7,8 +7,22 @@ const getAllProducts = async (req, res) => {
     const query = `{
   	products{
       id,
-      productTitle,
+		  productTitle
+		  productSlug
       productPrice
+		  productSalePrice
+      category {
+        id
+        categoryName
+      }
+      isProductOnSale
+
+      productFeaturedImage{
+        url
+        width
+        height
+      }
+
     }
 }`;
     const data = await gFetch(query);
@@ -16,7 +30,7 @@ const getAllProducts = async (req, res) => {
     resFunc(200, data, data.products.length, res);
   } catch (error) {
     errorFunc(
-      error.response.errors[0].extensions.code,
+      error.response.errors[0]?.extensions?.code || 400,
       error.response.errors[0].message,
       res
     );
@@ -29,14 +43,41 @@ const getSingleProduct = async (req, res) => {
   try {
     const query = `{
   	product(where: {id: "${pId}"}) {
-      id
-      productTitle
+       id,
+		  productTitle
+		  productSlug
+      productPrice
+		  productSalePrice
+      category {
+        id
+        categoryName
+      }
+		  colorsAvailable
+      isProductOnSale
+		  numberOfItemsLeft
+		  productDescription {
+        raw
+      }
+      productFeaturedImage{
+        url
+        width
+        height
+      }
+      productImages{
+        url
+        width
+        height
+      }
     }
   }`;
     const data = await gFetch(query);
     resFunc(200, data, 1, res);
   } catch (error) {
-    errorFunc(404, error.response.errors[0].message, res);
+    errorFunc(
+      error.response.errors[0]?.extensions?.code || 404,
+      error.response.errors[0].message,
+      res
+    );
   }
 };
 
