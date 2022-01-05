@@ -53,6 +53,7 @@ const getSingleProduct = async (req, res) => {
         categoryName
       }
 		  colorsAvailable
+      sizeAvailable
       isProductOnSale
 		  numberOfItemsLeft
 		  productDescription {
@@ -81,4 +82,26 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, getSingleProduct };
+const getProductSlugs = async (req, res) => {
+  try {
+    const query = `
+    {
+  products {
+    productSlug
+  }
+}
+    `;
+
+    const data = await gFetch(query);
+
+    resFunc(200, data, data.products.length, res);
+  } catch (error) {
+    errorFunc(
+      error.response.errors[0]?.extensions?.code || 404,
+      error.response.errors[0].message,
+      res
+    );
+  }
+};
+
+module.exports = { getAllProducts, getSingleProduct, getProductSlugs };
