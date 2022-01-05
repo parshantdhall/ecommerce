@@ -2,9 +2,12 @@ import { Box, useRadio } from "@chakra-ui/react";
 
 const CustomRadioBtns = (props) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
+  const { numberOfItemsAvail } = props;
 
   const input = getInputProps();
   const checkbox = getCheckboxProps();
+
+  const bgColor = numberOfItemsAvail > 0 ? "yellow.400" : "gray.400";
   return (
     <Box as="label">
       <input {...input} />
@@ -15,9 +18,9 @@ const CustomRadioBtns = (props) => {
         borderWidth="1px"
         borderRadius="md"
         _checked={{
-          bg: "yellow.400",
+          bg: bgColor,
           color: "white",
-          borderColor: "yellow.400",
+          borderColor: bgColor,
           fontWeight: "bold",
         }}
         px={4}

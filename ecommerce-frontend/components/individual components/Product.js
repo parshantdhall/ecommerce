@@ -87,21 +87,22 @@ const Product = ({ productData }) => {
               </Text>
               {/* ---Price-- */}
               <HStack>
+                {/* Original Product Price */}
+                <Text
+                  as="p"
+                  fontFamily="Merriweather"
+                  textDecoration={isProductOnSale ? "line-through" : ""}
+                  color={isProductOnSale ? "gray.400" : "black"}
+                >
+                  ${productPrice}
+                </Text>
                 {/* sale price */}
                 {isProductOnSale ? (
-                  <Text
-                    as="p"
-                    fontFamily="Merriweather"
-                    textDecoration="line-through"
-                    color="gray.400"
-                  >
-                    ${productSalePrice || 0.0}
+                  <Text as="p" fontFamily="Merriweather">
+                    ${productSalePrice}
                   </Text>
                 ) : (
-                  //  {/* Original Product Price */}
-                  <Text as="p" fontFamily="Merriweather">
-                    ${productPrice || 0.0}
-                  </Text>
+                  ""
                 )}
               </HStack>
             </VStack>

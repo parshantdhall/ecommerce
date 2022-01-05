@@ -4,19 +4,7 @@ import ProductImageContainer from "../sections/product detail page/ProductImageC
 
 const MainBodyProductDetail = ({ productData }) => {
   const [isSmallerThan750px] = useMediaQuery("(max-width: 750px)");
-
-  const {
-    productTitle,
-    productPrice,
-    isProductOnSale,
-    productSalePrice,
-    category,
-    colorsAvailable,
-    numberOfItemsLeft,
-    productDescription,
-    productImages,
-    productFeaturedImage,
-  } = productData;
+  const { productImages, productFeaturedImage } = productData;
 
   return (
     <Box w="full" h="full">
@@ -45,16 +33,7 @@ const MainBodyProductDetail = ({ productData }) => {
             },
           }}
         >
-          <ProductDescContainer
-            productTitle={productTitle}
-            productPrice={productPrice}
-            isProductOnSale={isProductOnSale}
-            productSalePrice={productSalePrice}
-            category={category}
-            colorsAvailable={colorsAvailable}
-            numberOfItemsLeft={numberOfItemsLeft}
-            productDescription={productDescription}
-          />
+          <ProductDescContainer productData={productData} />
         </GridItem>
       </Grid>
     </Box>

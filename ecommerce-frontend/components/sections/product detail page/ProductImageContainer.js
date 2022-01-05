@@ -25,9 +25,12 @@ const ProductImageContainer = ({ productFeaturedImage, productImages }) => {
                 <ChakraImage
                   src={img?.url}
                   alt="featured image"
-                  htmlWidth={"100%"}
-                  htmlHeight={"100%"}
                   fit="cover"
+                  as="img"
+                  sx={{
+                    minWidth: "100%",
+                    minHeight: "100%",
+                  }}
                 />
               </Box>
             </SwiperSlide>
@@ -43,7 +46,11 @@ const ProductImageContainer = ({ productFeaturedImage, productImages }) => {
           borderRadius="lg"
         >
           <Image
-            src={`${productFeaturedImage?.url}`}
+            src={`${
+              productFeaturedImage && productFeaturedImage.url
+                ? productFeaturedImage.url
+                : "/default-product-image"
+            }`}
             layout="fill"
             objectFit="cover"
             objectPosition="50% 80%"

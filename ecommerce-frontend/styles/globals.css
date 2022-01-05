@@ -37,3 +37,7 @@ body::-webkit-scrollbar-thumb {
 .customSlider {
   width: 100% !important;
 }
+
+div[class^="swiper-button"] {
+  color: black;
+}
