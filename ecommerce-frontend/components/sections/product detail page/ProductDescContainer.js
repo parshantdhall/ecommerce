@@ -11,6 +11,8 @@ import {
   Box,
   AccordionPanel,
   AccordionIcon,
+  Button,
+  Center,
 } from "@chakra-ui/react";
 import ConvertPostBody from "../../../lib/ConvertPostBody";
 import CustomRadioBtns from "../../individual components/CustomRadioBtns";
@@ -24,7 +26,14 @@ const ProductDescContainer = ({ productData }) => {
       onChange: console.log("hello"),
     });
 
+  const { getRootProps: getRootPropsColor, getRadioProps: getRadioPropsColor } =
+    useRadioGroup({
+      name: "Colors Available",
+      onChange: console.log("hello Color"),
+    });
+
   const group = getRootPropsSize();
+  const colorGroup = getRootPropsColor();
 
   //  const handleSizeSelection = ()=> {
 
@@ -45,6 +54,7 @@ const ProductDescContainer = ({ productData }) => {
     productData && productData.isProductOnSale
       ? productData.isProductOnSale
       : false;
+
   return (
     <Container py={4} maxW="container.xl" fontFamily="Montserrat">
       <VStack>
@@ -116,19 +126,30 @@ const ProductDescContainer = ({ productData }) => {
       )}
 
       {/* --------Color------ */}
-      <VStack spacing={3} alignItems="left" my={4}>
-        <Text fontWeight="bold">Select Color</Text>
-        <HStack {...group}>
-          {/* {options.map((value) => {
-            const radio = getRadioProps({ value });
-            return (
-              <CustomRadioBtns key={value} {...radio}>
-                {value}
-              </CustomRadioBtns>
-            );
-          })} */}
-        </HStack>
-      </VStack>
+      {productData.colorsAvailable && productData.colorsAvailable != null ? (
+        <VStack spacing={3} alignItems="left" my={4}>
+          <Text fontWeight="bold">Select Color</Text>
+          <HStack {...colorGroup}>
+            {objectToArrayConversion(productData.colorsAvailable).map(
+              (color) => {
+                const value = color[0];
+                const radio = getRadioPropsColor({ value });
+                return (
+                  <CustomRadioBtns
+                    key={value}
+                    {...radio}
+                    numberOfItemsAvail={color[1]}
+                  >
+                    {value}
+                  </CustomRadioBtns>
+                );
+              }
+            )}
+          </HStack>
+        </VStack>
+      ) : (
+        ""
+      )}
 
       {/* ----Description------ */}
       <Accordion allowToggle defaultIndex={0}>
@@ -151,6 +172,13 @@ const ProductDescContainer = ({ productData }) => {
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
+
+      {/* Add to cart button */}
+      <Center>
+        <Button m={5} colorScheme="red" py={7} w="50%" minW="400px">
+          Add To Cart
+        </Button>
+      </Center>
     </Container>
   );
 };

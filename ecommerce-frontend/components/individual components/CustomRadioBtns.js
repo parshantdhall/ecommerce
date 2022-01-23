@@ -14,15 +14,16 @@ const CustomRadioBtns = (props) => {
 
       <Box
         {...checkbox}
-        cursor="pointer"
+        cursor={numberOfItemsAvail > 0 ? "pointer" : "not-allowed"}
         borderWidth="1px"
         borderRadius="md"
         _checked={{
           bg: bgColor,
-          color: "white",
+          color: numberOfItemsAvail > 0 ? "white" : "black",
           borderColor: bgColor,
           fontWeight: "bold",
         }}
+        bg={numberOfItemsAvail > 0 ? "white" : "gray.400"}
         px={4}
         py={3}
       >
