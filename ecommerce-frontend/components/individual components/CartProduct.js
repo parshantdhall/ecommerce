@@ -13,10 +13,15 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Divider,
+  Spacer,
 } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
+import { useContext } from "react";
+import { cartDataContext } from "../../global states/CartStateContext";
 
-const CartProduct = () => {
+const CartProduct = ({ product }) => {
+  const cartData = useContext(cartDataContext);
+
   return (
     <Box w="full">
       <VStack spacing={3} my={3} w="full">
@@ -32,7 +37,7 @@ const CartProduct = () => {
             borderRadius="lg"
           >
             <Image
-              src="/footwear.jpg"
+              src={product.imgUrl.url}
               layout="fill"
               objectFit="cover"
               aria-label="Cart Product image."
@@ -45,36 +50,51 @@ const CartProduct = () => {
             {/* Product Name and Price */}
             <HStack w="full" justifyContent="space-between">
               <Text as="p" fontWeight="bold">
-                Product Name
+                {product.title}
               </Text>
-              <Text as="p"> $200 </Text>
+              <Text as="p"> ${product.price} </Text>
             </HStack>
 
             <HStack spacing={3}>
               {/* Product Color */}
-              <HStack>
-                <Text as="p" fontSize="sm">
-                  Color
-                </Text>
-                <Tag borderRadius="full">
-                  <TagLabel>Black</TagLabel>
-                </Tag>
-              </HStack>
+              {product.selectedColor ? (
+                <HStack>
+                  <Text as="p" fontSize="sm">
+                    Color
+                  </Text>
+                  <Tag borderRadius="full">
+                    <TagLabel>{product.selectedColor}</TagLabel>
+                  </Tag>
+                </HStack>
+              ) : (
+                ""
+              )}
+
               {/* Product Size */}
-              <HStack>
-                <Text as="p" fontSize="sm">
-                  Size
-                </Text>
-                <Tag borderRadius="full">
-                  <TagLabel fontWeight="bold">M</TagLabel>
-                </Tag>
-              </HStack>
+              {product.selectedSize ? (
+                <HStack>
+                  <Text as="p" fontSize="sm">
+                    Size
+                  </Text>
+                  <Tag borderRadius="full">
+                    <TagLabel fontWeight="bold">
+                      {product.selectedSize}
+                    </TagLabel>
+                  </Tag>
+                </HStack>
+              ) : (
+                ""
+              )}
             </HStack>
           </VStack>
         </HStack>
         {/* number of product area */}
         <HStack spacing={4} w="full">
-          <IconButton aria-label="remove product" icon={<FaTimes />} />
+          <IconButton
+            aria-label="remove product"
+            onClick={() => cartData.deleteFromCart(product)}
+            icon={<FaTimes />}
+          />
           {/* Note default value will be 1 or number of times user add
             Max will be how much item is remaining in the inventory
             */}
